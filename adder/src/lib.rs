@@ -3,7 +3,7 @@ pub fn add_two(a:i32) -> i32 {
 }
 #[cfg(test)]
 mod tests {
-    use super::add_two;
+    use super::*;   //originally; use super::add_two, but ignored in favor of the glob function; '*'
 
     #[test]
     //#[should_panic(expected = "assertion failed")]  //tells it to only give a bye/bi/by? if matched error
