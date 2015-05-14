@@ -4,6 +4,6 @@ fn main() {
         println!("Think Different!");
     }
     else
-        println!("That's also great.");
+        println!("That is also great.");
 
 }
