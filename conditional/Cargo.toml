@@ -1,0 +1,17 @@
+[package]
+name = "conditional"
+version = "0.1.0"
+authors = ["Derek Prince <ace.prince08@gmail.com>"]
+
+[features]
+# This is the section del importante
+
+# no features by default
+default = []
+
+# [cfg(foo)]
+#[cfg(any(unix, windows))]
+
+# with a bcrypt package, secure-password can be used in conjunction;
+# secure-password = ["bcrypt"]
+
