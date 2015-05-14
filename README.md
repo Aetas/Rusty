@@ -1,3 +1,2 @@
 # Rusty
-Space for developing a Rusty love.
-
+Space for developing a *Rusty* love.
