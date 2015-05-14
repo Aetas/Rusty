@@ -6,4 +6,7 @@ fn main() {
     else {
         println!("That's also great.");
     }
+    if cfg!(target_os = "linux") {
+        println!("You go Glen Coco.");
+    }
 }
