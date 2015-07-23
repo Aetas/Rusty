@@ -21,7 +21,9 @@ impl Philosopher {
             name: name.to_string()
         }
     }
-
+    
+    //the explicit statement of &self in eat is what makes it a method of
+    //Philosopher, while new is only an associated function, called by ::
     fn eat(&self) {
         println!("{} is done eating.", self.name);
         //can I just say how much nicer it is to use 'self' over 'this'
@@ -31,11 +33,11 @@ impl Philosopher {
 
 fn main() {
     let philosophers = vec![
-        let p1 = Philosopher::new("Baruch Spinoza");
-        let p2 = Philosopher::new("Gilles Deluze");
-        let p3 = Philosopher::new("Karl Marx");
-        let p4 = Philosopher::new("Friedrich Nietzsche");
-        let p5 = Philosopher::new("Michel Foucault");
+        let p1 = Philosopher::new("Baruch Spinoza"),
+        let p2 = Philosopher::new("Gilles Deluze"),
+        let p3 = Philosopher::new("Karl Marx"),
+        let p4 = Philosopher::new("Friedrich Nietzsche"),
+        let p5 = Philosopher::new("Michel Foucault"),
         //alternate form without ::new() would look like...
         //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
     ];
