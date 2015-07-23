@@ -6,6 +6,8 @@
 //before coming up with the joke. Except that the punch line is concurrency,
 //and we already have too much concurrency in punch lines.
 
+use std::thread;
+
 struct Philosopher {
     name: String,
 }
@@ -25,13 +27,19 @@ impl Philosopher {
     //the explicit statement of &self in eat is what makes it a method of
     //Philosopher, while new is only an associated function, called by ::
     fn eat(&self) {
-        println!("{} is done eating.", self.name);
+        println!("{} is eating.", self.name);
         //can I just say how much nicer it is to use 'self' over 'this'
         //'this' is a piece of garbage (and it's not even collected.)
+        thread::sleep_ms(1000);
+
+        println!("{} is done eating." self.name);
     }
 }
 
 fn main() {
+    //stuffs the philosophers into a vector rather than 5 objects.
+    //the vector is called philosopher
+    //(duh)
     let philosophers = vec![
         Philosopher::new("Baruch Spinoza"),
         Philosopher::new("Gilles Deluze"),
