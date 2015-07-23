@@ -32,7 +32,7 @@ impl Philosopher {
         //'this' is a piece of garbage (and it's not even collected.)
         thread::sleep_ms(1000);
 
-        println!("{} is done eating." self.name);
+        println!("{} is done eating.", self.name);
     }
 }
 
