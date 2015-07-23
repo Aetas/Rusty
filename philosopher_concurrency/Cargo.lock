@@ -1,0 +1,4 @@
+[root]
+name = "philosopher_concurrency"
+version = "0.1.0"
+
