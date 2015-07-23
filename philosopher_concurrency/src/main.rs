@@ -33,11 +33,11 @@ impl Philosopher {
 
 fn main() {
     let philosophers = vec![
-        let p1 = Philosopher::new("Baruch Spinoza"),
-        let p2 = Philosopher::new("Gilles Deluze"),
-        let p3 = Philosopher::new("Karl Marx"),
-        let p4 = Philosopher::new("Friedrich Nietzsche"),
-        let p5 = Philosopher::new("Michel Foucault"),
+        Philosopher::new("Baruch Spinoza"),
+        Philosopher::new("Gilles Deluze"),
+        Philosopher::new("Karl Marx"),
+        Philosopher::new("Friedrich Nietzsche"),
+        Philosopher::new("Michel Foucault"),
         //alternate form without ::new() would look like...
         //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
     ];
