@@ -11,7 +11,7 @@ use std::sync::{Mutex, Arc};    //sync for Mutex and Arc only
 
 struct Philosopher {
     name: String,
-    left: usize,
+    left: usize,    //usize, conveniently, is the type used to index vectors.
     right: usize,
 }
 
