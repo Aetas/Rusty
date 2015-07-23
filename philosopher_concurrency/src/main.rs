@@ -21,16 +21,26 @@ impl Philosopher {
             name: name.to_string()
         }
     }
+
+    fn eat(&self) {
+        println!("{} is done eating.", self.name);
+        //can I just say how much nicer it is to use 'self' over 'this'
+        //'this' is a piece of garbage (and it's not even collected.)
+    }
 }
 
 fn main() {
-    let p1 = Philosopher::new("Baruch Spinoza");
-    let p2 = Philosopher::new("Gilles Deluze");
-    let p3 = Philosopher::new("Karl Marx");
-    let p4 = Philosopher::new("Friedrich Nietzsche");
-    let p5 = Philosopher::new("Michel Foucault");
-    //alternate form without ::new() would look like...
-    //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
-    
+    let philosophers = vec![
+        let p1 = Philosopher::new("Baruch Spinoza");
+        let p2 = Philosopher::new("Gilles Deluze");
+        let p3 = Philosopher::new("Karl Marx");
+        let p4 = Philosopher::new("Friedrich Nietzsche");
+        let p5 = Philosopher::new("Michel Foucault");
+        //alternate form without ::new() would look like...
+        //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
+    ];
 
+    for p in &philosophers {
+        p.eat();
+    }
 }
