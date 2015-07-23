@@ -6,10 +6,13 @@
 //before coming up with the joke. Except that the punch line is concurrency,
 //and we already have too much concurrency in punch lines.
 
-use std::thread;
+use std::thread;                //multi threading
+use std::sync::{Mutex, Arc};    //sync for Mutex and Arc only
 
 struct Philosopher {
     name: String,
+    left: usize,
+    right: usize,
 }
 
 //impl allows defining things on philosopher structs.
@@ -18,15 +21,20 @@ struct Philosopher {
 //string to the external name &str by use of .to_string()
 //This is immediately used in fn main() to create the 5 philosophers w/ name arguments
 impl Philosopher {  
-    fn new(name: &str) -> Philosopher { //returns a Philosopher struct
+    fn new(name: &str, left: usize, right: usize) -> Philosopher { //returns a Philosopher struct
         Philosopher { //last expression, austomatically returned
-            name: name.to_string()
+            name: name.to_string(),
+            left: left,
+            right: right,
         }
     }
     
     //the explicit statement of &self in eat is what makes it a method of
     //Philosopher, while new is only an associated function, called by ::
-    fn eat(&self) {
+    fn eat(&self, table: &Table) {
+        let _left = table.forks[self.left].lock().unwrap(); 
+        let _right = table.forks[self.right].lock().unwrap();
+
         println!("{} is eating.", self.name);
         //can I just say how much nicer it is to use 'self' over 'this'
         //'this' is a piece of garbage (and it's not even collected.)
@@ -36,16 +44,29 @@ impl Philosopher {
     }
 }
 
+//
+struct Table {
+    forks: Vec<Mutex<()>>,
+}
+
 fn main() {
+    let table = Arc::new(Table { forks: vec![
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+        Mutex::new(()),
+    ]});
+
     //stuffs the philosophers into a vector rather than 5 objects.
     //the vector is called philosopher
     //(duh)
     let philosophers = vec![
-        Philosopher::new("Baruch Spinoza"),
-        Philosopher::new("Gilles Deluze"),
-        Philosopher::new("Karl Marx"),
-        Philosopher::new("Friedrich Nietzsche"),
-        Philosopher::new("Michel Foucault"),
+        Philosopher::new("Baruch Spinoza", 0, 1),
+        Philosopher::new("Gilles Deluze", 1, 2),
+        Philosopher::new("Karl Marx", 2, 3),
+        Philosopher::new("Friedrich Nietzsche", 3, 4),
+        Philosopher::new("Michel Foucault", 0, 4),
         //alternate form without ::new() would look like...
         //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
     ];
@@ -58,8 +79,10 @@ fn main() {
     //a 'closure as an argument and calls that closure on each element in turn.'
     //Alrighty.
     let handles: Vec<_> = philosophers.into_iter().map(|p| {
+        let table = table.clone();
+
         thread::spawn(move || { 
-            p.eat();
+            p.eat(&table);
         }) //creates a thread with a closure as an argument, and executes it with impunity
            //move indicates that the cosure is taking ownership of the values it's capturing
            //(p variable in the map function, for the most part)
