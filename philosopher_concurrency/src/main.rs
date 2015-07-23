@@ -49,8 +49,30 @@ fn main() {
         //alternate form without ::new() would look like...
         //let p6 = Philosopher { name: "Asswrangler Adolf".to_string() };
     ];
+   
+    //hold me close, sanity
+    //'_' is a type placeholder in the Vector declaration for handles
+    //into_iter() creates an iterator on philosopher (the vector)
+    //to take ownership of each object philosopher
+    //with this newly minted iterator, a map is called on it which takes
+    //a 'closure as an argument and calls that closure on each element in turn.'
+    //Alrighty.
+    let handles: Vec<_> = philosophers.into_iter().map(|p| {
+        thread::spawn(move || { 
+            p.eat();
+        }) //creates a thread with a closure as an argument, and executes it with impunity
+           //move indicates that the cosure is taking ownership of the values it's capturing
+           //(p variable in the map function, for the most part)
+    }).collect();
+    //collect grabs all map call results and stores them in the vector we so 
+    //cleverly made - handles. Inferred type at it's finest here
+    //stores a bunch of handles from the hread::spawn calls to access each thread.
 
-    for p in &philosophers {
-        p.eat();
+    //going through the colection in handles,
+    //join each thread. .join() ensures that each thread finishes execution before 
+    //the combining executes.
+    //and voila! multithreading.
+    for h in handles {
+        h.join().unwrap();
     }
 }
