@@ -1,0 +1,6 @@
+[package]
+name = "Warmup"
+version = "0.1.0"
+authors = ["Derek Prince <ace.prince08@gmail.com>"]
+
+[dependencies]
